@@ -39,10 +39,10 @@ with open(filename, newline='') as csvfile:
                     s.settimeout(3)
                     s.connect((row[0],int(row[1])))
                     print(f"Connection: {row[0]}:{row[1]}/{row[2]} SUCCESS\n")
-                    result.append(([row[0],row[1],row[2]], "SUCCESS"))
+                    result.append((row[0],row[1],row[2], "SUCCESS"))
                 except:
                     print(f"Connection: {row[0]}:{row[1]}/{row[2]} FAIL\n")
-                    result.append(([row[0],row[1],row[2]], "FAIL"))
+                    result.append((row[0],row[1],row[2], "FAIL"))
         if(row[2] == "UDP"):
             with(socket.socket(socket.AF_INET, socket.SOCK_DGRAM)) as s:
                 try:
@@ -51,10 +51,10 @@ with open(filename, newline='') as csvfile:
                     s.sendto(bytes(packet),(row[0],int(row[1])))
                     data, addressn = s.recvfrom(1024)
                     print(f"Connection: {row[0]}:{row[1]}/{row[2]} SUCCESS\n")
-                    result.append(([row[0],row[1],row[2]], "SUCCESS"))
+                    result.append((row[0],row[1],row[2], "SUCCESS"))
                 except:
                     print(f"Connection: {row[0]}:{row[1]}/{row[2]} FAIL\n")
-                    result.append(([row[0],row[1],row[2]], "FAIL"))
+                    result.append((row[0],row[1],row[2], "FAIL"))
 
 outfile = "mignetresults.csv"
 with open(outfile, "w", newline='') as csvfile:
